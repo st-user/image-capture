@@ -2,7 +2,7 @@
 アプリケーション、モニターなどから画面キャプチャーを切り抜くことができるツールです。
 切り抜いた画像どうしを重ねて比較したり、切り抜いた画像と元の画面とを重ねて比較することができます。
 
-サイト→https://wwww.ajizablg.com/image-capture/index.html
+サイト→https://www.ajizablg.com/image-capture/index.html
 
 ## ビルド方法
 ### 前提
