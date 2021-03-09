@@ -129,6 +129,11 @@ export default class ImageHandler {
         this.#drawImage();
     }
 
+    restoreImage() {
+        this.#clear();
+        this.#restoreSnapshot();
+    }
+
     drawRect(_sx, _sy, _width, _height) {
         if (!this.#$baseVideo || !this.#$videoCanvas || !this.#videoSnapshot) {
             return;
@@ -140,9 +145,8 @@ export default class ImageHandler {
 
         
         this.#clear();
-
+        this.#restoreSnapshot();
         const ctx = this.#$videoCanvas.getContext('2d');
-        ctx.putImageData(this.#videoSnapshot, 0, 0);
         ctx.strokeStyle = 'white';
         ctx.strokeRect(sx, sy, width, height);
         ctx.strokeStyle = 'black';
@@ -185,8 +189,8 @@ export default class ImageHandler {
         const videoHeight = this.#$baseVideo.videoHeight;
 
         const mag = this.#$baseVideo.videoWidth / this.#cssWidth;
-        const sx = (_sx - canvasLeft) * mag;
-        const sy = (_sy - canvasTop) * mag;
+        const sx = Math.max((_sx - canvasLeft) * mag, 0);
+        const sy = Math.max((_sy - canvasTop) * mag, 0);
 
         let width = Math.min(_width * mag, videoWidth - sx);
         let height = Math.min(_height * mag, videoHeight - sy);
@@ -194,6 +198,11 @@ export default class ImageHandler {
         height = Math.max(height, 1);
 
         return { sx, sy, width, height, mag };
+    }
+
+    #restoreSnapshot() {
+        const ctx = this.#$videoCanvas.getContext('2d');
+        ctx.putImageData(this.#videoSnapshot, 0, 0);
     }
 
     #clear() {

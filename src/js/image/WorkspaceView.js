@@ -186,14 +186,17 @@ export default class WorkspaceView {
             return;
         }
         const { imageData, mag } = imageDataInfo;
-        const xy = this.#workspaceModel.getCuttingStartCoord();
+        const { sx, sy } = this.#workspaceModel.getSelectedCoordinates();
         const leftTop = DOM.getElementPosition(this.#$workspace);
         const workspaceLeft = !leftTop ? 0 : leftTop.left;
         const workspaceTop = !leftTop ? 0 : leftTop.top;
 
+        console.log(`sx ${sx}, sy ${sy}, left: ${workspaceLeft}, top: ${workspaceTop}`);
+
         const view = new PartialImageView(
             this.#partialImageContextMenuModel, imageData, mag,
-            xy.x - workspaceLeft, xy.y - workspaceTop
+            Math.max(sx - workspaceLeft, workspaceLeft), 
+            Math.max(sy - workspaceTop, workspaceTop)
         );
         view.setUpEvents();
         

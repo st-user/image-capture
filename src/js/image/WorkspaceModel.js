@@ -19,6 +19,8 @@ export default class WorkspaceModel {
     #endCuttingXY;
     #isCutting;
 
+    #cutImageDataInfo;
+
     constructor() {
         this.#state = WorkspaceState.BEFORE_CAPTURING;
         this.#imageHandler = new ImageHandler();
@@ -93,8 +95,9 @@ export default class WorkspaceModel {
         }
         this.#isCutting = false;
         this.#endCuttingXY = { x, y };
-        this.#imageHandler.showImage();
+        this.#imageHandler.restoreImage();
 
+        this.#cutImageDataInfo = this.#retoreImageData();
         if (this.#state === WorkspaceState.CAPTURING) {
             this.resumeCapturing(true);
         }
@@ -103,20 +106,10 @@ export default class WorkspaceModel {
     }
 
     getSelectedImageData() {
-        const cood = this.getSelectedCoordinates();
-        if (!cood) {
-            return;
-        }
-        const { sx, sy, width, height } = cood;
-        return this.#imageHandler.getSelectedImageData(
-            sx, sy, width, height
-        );
+        const ret = this.#cutImageDataInfo;
+        this.#cutImageDataInfo = undefined;
+        return ret;
     }
-
-    getCuttingStartCoord() {
-        return this.#startCuttingXY;
-    }
-
 
     getSelectedCoordinates() {
         if (!this.#startCuttingXY || !this.#endCuttingXY) {
@@ -161,6 +154,17 @@ export default class WorkspaceModel {
 
     isStopBtnDisabled() {
         return this.#state === WorkspaceState.BEFORE_CAPTURING;
+    }
+
+    #retoreImageData() {
+        const cood = this.getSelectedCoordinates();
+        if (!cood) {
+            return;
+        }
+        const { sx, sy, width, height } = cood;
+        return this.#imageHandler.getSelectedImageData(
+            sx, sy, width, height
+        );
     }
 
     #drawRect() {
