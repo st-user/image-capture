@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+        <link rel="shortcut icon" href="favicon.ico">
+        <title>重ねる画面キャプチャーツール</title>
+        <script src="./js/style.js?q=1.0.0"></script>
+        <!-- ##GA-TrackingCodeHere## -->
+    </head>
+
+    <body>
+        <div id="headerArea">
+        </div>
+
+
+        <!-- explanation -->
+        <ul id="explanations" class="explanations">
+            <li class="explanations__li">ブラウザは、Google Chrome, Firefox, Microsoft Edge(Chromium版)を使用してください。Safariはサポートしません。</li>
+            <li class="explanations__li"><a target="_blank" rel="noopener noreferrer" href="https://github.com/st-user/image-capture">ソースコード(GitHub)</a></li>
+            <li class="explanations__li"><a target="_blank" rel="noopener noreferrer" href="https://twitter.com/prg_vch">各種情報(Twitter)</a></li>
+            <li class="explanations__li"><a target="_blank" rel="noopener noreferrer" href="https://www.ajizablg.com/about/">このサイトについて</a></li>
+        </ul>
+
+        <div id="workspace" class="workspace">
+            <div id="workspaceControls" class="workspace__controls">
+                <ul class="workspace__buttons clearfixContainer">
+                    <li class="workspace__button-li">
+                        <a href="#" id="startCapturing" class="workspace__button">新規キャプチャー</a>
+                    </li>
+                    <li class="workspace__button-li">
+                        <a href="#" id="pauseCapturing" class="workspace__button">一時停止</a>
+                    </li>
+                    <li class="workspace__button-li">
+                        <a href="#" id="resumeCapturing" class="workspace__button">再開</a>
+                    </li>
+                    <li class="workspace__button-li">
+                        <a href="#" id="stopCapturing" class="workspace__button">終了</a>
+                    </li>
+                    <li class="workspace__button-li">
+                        <a href="#" id="toggleSizeSttingArea" class="workspace__toogle-size-setting-area">サイズ</a>
+                    </li>
+                </ul>
+                <ul id="sizeSttingArea" class="workspace__size-setting-area">
+                    <li class="clearfixContainer">
+                        <div class="workspace__size-setting-title">
+                            キャプチャー画面サイズ:
+                        </div>
+                        <ul class="workspace__size-setting-content">
+                            <li class="workspace__size-setting-content-li">
+                                <label>
+                                    <input type="radio" name="capturedSceenSize" value="window" checked/>
+                                    ウィンドウ幅に合わせる
+                                </label>
+                            </li>
+                            <li class="workspace__size-setting-content-li">
+                                <label>
+                                    <input type="radio" name="capturedSceenSize" value="original"/>
+                                    原寸大
+                                </label>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div id="workspaceNoContent">
+                <div class="workspace__exlanation">
+                    <div class="workspace__exlanation-image-area">
+                        <img src="./image-capturing.gif" decoding="async" alt="イメージ"/>
+                    </div>
+                    <div>
+                        ↑「新規キャプチャー」押下で画面を選択した後、マウス右クリック＆マウスドラッグによって、画面の一部を切り抜くことができます。
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ul id="partialImageContextMenu" class="partial-image-contextmenu">
+            <li class="partial-image-contextmenu__li">
+                <a href="#" id="deletePartialImage" class="partial-image-contextmenu__cmd">削除</a>
+            </li>
+            <li class="partial-image-contextmenu-li">
+                <a href="#" id="downloadPartialImage" class="partial-image-contextmenu__cmd">ダウンロード</a>
+            </li>
+        </ul>
+
+        <script>
+            var APP_VERSION = '1.0.0';
+            (function() {
+                var SCRIPT_SRC = './js/main.js?q=' + APP_VERSION;
+                var $script = document.createElement('script');
+                $script.src = SCRIPT_SRC;
+                document.body.appendChild($script);
+            })();
+        </script>
+    </body>
+</html>

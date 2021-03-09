@@ -1,0 +1,126 @@
+@import 'global';
+
+.workspace {
+    width: 100%;
+    position: relative;
+
+    &__main-image {
+        display: block;
+        margin: auto;
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    &__partial-image {
+        cursor: move;
+        position: absolute;
+        left: 0;
+        top: 0;
+        border: 2px dotted #fbfbfb;
+        box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.3);
+
+        &.is-dragged {
+            opacity: 0.5;
+        }
+    }
+
+    &__controls {
+        margin: auto;
+        width: 540px;
+        position: relative;
+    }
+
+    &__buttons {
+        height: 24px;
+        margin-bottom: 12px;
+    }
+
+    &__button-li {
+        float: left;
+        height: 24px;
+        margin-right: 12px;
+    }
+
+    &__button {
+        border-radius: 3px;
+        display: inline-block;
+        font-size: 18px;
+        height: 32px;
+        line-height: 32px;
+        overflow: hidden;
+        text-decoration: none;
+        padding-left: 6px;
+        padding-right: 6px;
+        
+
+        &.is-active {
+            background: linear-gradient(#afc4bd 0%, #222625 100%); /* stylelint-disable-line plugin/no-unsupported-browser-features */
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.28);
+            color: #222625;
+            font-weight: bold;
+            text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.66);
+        }
+
+        &.is-disabled {
+            background-color: #d4d9d7;
+            color: #b9bdbb;
+            cursor: default;
+        }
+
+    }
+
+    &__button:hover {
+        &.is-active {
+            opacity: 0.7;
+        }
+    }
+
+    &__toogle-size-setting-area {
+        height: 32px;
+        line-height: 32px;
+        display: inline-block;
+        font-size: 18px;
+        color: #626865;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    &__size-setting-area {
+        @extend %g__shadow;
+        position: absolute;
+        top: 24px;
+        left: 24px;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 12px;
+        border-radius: 3px;
+    }
+
+    &__size-setting-title {
+        float: left;
+        width: 200px;
+        height: 48px;
+        line-height: 48px;
+    }
+
+    &__size-setting-content {
+        float: left;
+        height: 48px;
+    }
+
+    &__size-setting-content-li {
+        height: 24px;
+        line-height: 24px;
+    }
+
+    &__exlanation {
+        margin: auto;
+        margin-top: 24px;
+        width: 540px;
+    }
+
+    &__exlanation-image-area {
+        @extend %g__shadow;
+        width: 480px;
+        margin-bottom: 12px;
+    }
+}
