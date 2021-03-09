@@ -29,11 +29,14 @@ export default class WorkspaceModel {
     }
 
     async startCapturing() {
+        const beforeState = this.#state;
         this.#state = WorkspaceState.CAPTURING;
         const canCapture = await this.#imageHandler.startCapturing();
 
         if (canCapture) {
             CommonEventDispatcher.dispatch(CustomEventNames.IMAGE_CAPTURE__START_CAPTURING);
+        } else {
+            this.#state = beforeState;
         }
     }
 

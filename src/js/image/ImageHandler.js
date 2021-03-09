@@ -3,6 +3,7 @@ import { CommonEventDispatcher, DOM } from 'vncho-lib';
 import { CustomEventNames } from '../common/CustomEventNames.js';
 
 const CHECH_IF_SOURCE_STREAM_TRACK_RESIZED_INTERVAL = 300;
+const MIN_CUT_SIZE = 12;
 
 export default class ImageHandler {
 
@@ -113,6 +114,10 @@ export default class ImageHandler {
             _sx, _sy, _width, _height
         );
 
+        if (width < MIN_CUT_SIZE || height < MIN_CUT_SIZE) {
+            return undefined;
+        }
+
         // console.log(`orig  sx: ${_sx}, sy: ${_sy}, width: ${_width}, height: ${_height}`);
         // console.log(`result  sx: ${sx}, sy: ${sy}, width: ${width}, height: ${height}`);
 
@@ -192,10 +197,8 @@ export default class ImageHandler {
         const sx = Math.max((_sx - canvasLeft) * mag, 0);
         const sy = Math.max((_sy - canvasTop) * mag, 0);
 
-        let width = Math.min(_width * mag, videoWidth - sx);
-        let height = Math.min(_height * mag, videoHeight - sy);
-        width = Math.max(width, 1);
-        height = Math.max(height, 1);
+        const width = Math.min(_width * mag, videoWidth - sx);
+        const height = Math.min(_height * mag, videoHeight - sy);
 
         return { sx, sy, width, height, mag };
     }

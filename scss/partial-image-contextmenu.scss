@@ -2,10 +2,10 @@
 
 .partial-image-contextmenu {
     @extend %g__shadow;
-    position: absolute;
     background: rgba(255, 255, 255, 0.9);
-    padding: 12px;
     border-radius: 3px;
+    padding: 12px;
+    position: absolute;
     width: 120px;
     
     &__li {
@@ -14,8 +14,8 @@
     }
 
     &__cmd {
-        cursor: pointer;
         color: #262727;
-        text-decoration: underline;
+        cursor: pointer;
+        text-decoration: none;
     }
 }
