@@ -191,7 +191,7 @@ export default class WorkspaceView {
         const workspaceLeft = !leftTop ? 0 : leftTop.left;
         const workspaceTop = !leftTop ? 0 : leftTop.top;
 
-        console.log(`sx ${sx}, sy ${sy}, left: ${workspaceLeft}, top: ${workspaceTop}`);
+        // console.log(`sx ${sx}, sy ${sy}, left: ${workspaceLeft}, top: ${workspaceTop}`);
 
         const view = new PartialImageView(
             this.#partialImageContextMenuModel, imageData, mag,
