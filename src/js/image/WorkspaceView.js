@@ -1,4 +1,4 @@
-import { CommonEventDispatcher, debounce, DOM, HoverWindowView } from 'vncho-lib';
+import { CommonEventDispatcher, debounce, DOM } from 'vncho-lib';
 
 import { CustomEventNames } from '../common/CustomEventNames.js';
 import PartialImageView from './PartialImageView.js';
@@ -19,7 +19,6 @@ export default class WorkspaceView {
     #$resumeCapturing;
     #$stopCapturing;
     #$capturedScreenSize;
-    #capturedScreenSizeView;
 
     #$videoCanvas;
     #partialImages;
@@ -39,12 +38,6 @@ export default class WorkspaceView {
         this.#$resumeCapturing = DOM.query('#resumeCapturing');
         this.#$stopCapturing = DOM.query('#stopCapturing');
         this.#$capturedScreenSize = DOM.all('input[name="capturedSceenSize"]', this.#$workspaceControls);
-
-        this.#capturedScreenSizeView = new HoverWindowView(
-            CustomEventNames.IMAGE_CAPTURE__TOGGLE_SIZE_SETTING_AREA,
-            '#toggleSizeSttingArea',
-            '#sizeSttingArea'
-        );
 
         this.#partialImages = new Map();
     }
@@ -132,8 +125,6 @@ export default class WorkspaceView {
         window.addEventListener('resize', debounce(() => {
             this.#resize();
         }, 500));
-
-        this.#capturedScreenSizeView.setUpEvents();
 
         this.#$capturedScreenSize.forEach($elem => {
             if ($elem.checked) {

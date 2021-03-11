@@ -75,50 +75,38 @@
         }
     }
 
-    &__toogle-size-setting-area {
-        color: #626865;
-        display: inline-block;
-        font-size: 18px;
-        font-weight: bold;
-        height: 32px;
-        line-height: 32px;
-        text-decoration: none;
-    }
-
-    &__size-setting-area {
-        @extend %g__shadow;
-        background: rgba(255, 255, 255, 0.9);
-        border-radius: 3px;
-        left: 24px;
-        padding: 12px;
-        position: absolute;
-        top: 24px;
-    }
-
     &__size-setting-title {
         float: left;
-        height: 48px;
-        line-height: 48px;
-        width: 200px;
-    }
-
-    &__size-setting-content {
-        float: left;
-        height: 48px;
+        height: 18px;
+        line-height: 18px;
+        width: 180px;
     }
 
     &__size-setting-content-li {
-        height: 24px;
-        line-height: 24px;
+        float: left;
+        height: 18px;
+        line-height: 18px;
     }
 
-    &__exlanation {
+    &__explanation {
         margin: auto;
-        margin-top: 24px;
-        width: 540px;
+        margin-top: 12px;
+        width: 768px;
     }
 
-    &__exlanation-image-area {
+    &__explanation-text {
+        background-color: #fff;
+        list-style: disc;
+        padding: 6px;
+    }
+
+    &__explanation-text-li {
+        font-size: 12px;
+        margin-bottom: 6px;
+        margin-left: 12px;
+    }
+
+    &__explanation-image-area {
         @extend %g__shadow;
         margin-bottom: 12px;
         width: 480px;

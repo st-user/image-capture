@@ -42,39 +42,37 @@
                     <li class="workspace__button-li">
                         <a href="#" id="stopCapturing" class="workspace__button">終了</a>
                     </li>
-                    <li class="workspace__button-li">
-                        <a href="#" id="toggleSizeSttingArea" class="workspace__toogle-size-setting-area">サイズ</a>
-                    </li>
                 </ul>
-                <ul id="sizeSttingArea" class="workspace__size-setting-area">
-                    <li class="clearfixContainer">
-                        <div class="workspace__size-setting-title">
-                            キャプチャー画面サイズ:
-                        </div>
-                        <ul class="workspace__size-setting-content">
-                            <li class="workspace__size-setting-content-li">
-                                <label>
-                                    <input type="radio" name="capturedSceenSize" value="window" checked/>
-                                    ウィンドウ幅に合わせる
-                                </label>
-                            </li>
-                            <li class="workspace__size-setting-content-li">
-                                <label>
-                                    <input type="radio" name="capturedSceenSize" value="original"/>
-                                    原寸大
-                                </label>
-                            </li>
-                        </ul>
+                <ul id="sizeSttingArea" class="workspace__size-setting-area clearfixContainer">
+                    <li class="workspace__size-setting-title">
+                        キャプチャー画面サイズ:
+                    </li>
+                    <li class="workspace__size-setting-content-li">
+                        <label>
+                            <input type="radio" name="capturedSceenSize" value="window" checked/>
+                            ウィンドウ幅に合わせる
+                        </label>
+                    </li>
+                    <li class="workspace__size-setting-content-li">
+                        <label>
+                            <input type="radio" name="capturedSceenSize" value="original"/>
+                            原寸大
+                        </label>
                     </li>
                 </ul>
             </div>
             <div id="workspaceNoContent">
-                <div class="workspace__exlanation">
-                    <div class="workspace__exlanation-image-area">
+                <div class="workspace__explanation">
+                    <ul class="workspace__explanation-text">
+                        <li class="workspace__explanation-text-li">
+                            「新規キャプチャー」押下で画面を選択した後、範囲選択(マウス左クリック＆ドラッグ)で、画面の一部を切り抜くことができます。
+                        </li>
+                        <li class="workspace__explanation-text-li">
+                            キャプチャーした画面は、右クリック＞メニューより、削除、ダウロードが行えます。
+                        </li>
+                    </ul>
+                    <div class="workspace__explanation-image-area">
                         <img src="./image-capturing.gif" decoding="async" alt="イメージ"/>
-                    </div>
-                    <div>
-                        ↑「新規キャプチャー」押下で画面を選択した後、マウス左クリック＆マウスドラッグによって、画面の一部を切り抜くことができます。
                     </div>
                 </div>
             </div>
