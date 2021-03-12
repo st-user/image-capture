@@ -20,6 +20,7 @@ CustomEventNames
     .set('IMAGE_CAPTURE__TOGGLE_CONTEXT_MENU', 'image-capture/toggle-context-menu')
     .set('IMAGE_CAPTURE__DELETE_PARTIAL_IMAGE', 'image-capture/delete-partial-image')
     .set('IMAGE_CAPTURE__DOWNLOAD_PARTIAL_IMAGE', 'image-capture/download-partial-image')
+    .set('IMAGE_CAPTURE__TOGGLE_PARTIAL_IMAGE_SIZE', 'image-capture/toggle-partial-image-size')
 
 
 ;

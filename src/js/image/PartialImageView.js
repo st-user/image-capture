@@ -1,4 +1,6 @@
-import { DOM } from 'vncho-lib';
+import { CommonEventDispatcher, DOM } from 'vncho-lib';
+import { CustomEventNames } from '../common/CustomEventNames.js';
+import PartialImageModel from './PartialImageModel.js';
 
 
 const draggable = params => {
@@ -58,13 +60,15 @@ let zIndexCounter = 10;
 export default class PartialImageView {
 
     #partialImageContextMenuModel;
+    #paritalImageModel;
 
     #id;
     #$canvas;
 
-    constructor(partialImageContextMenuModel, imageData, mag, x, y) {
+    constructor(partialImageContextMenuModel, imageData, sx, sy, workspaceLeft, workspaceTop) {
 
         this.#partialImageContextMenuModel = partialImageContextMenuModel;
+        this.#paritalImageModel = new PartialImageModel(workspaceLeft, workspaceTop);
 
         this.#$canvas = document.createElement('canvas');
         this.#$canvas.width = imageData.width;
@@ -72,19 +76,19 @@ export default class PartialImageView {
         this.#$canvas.getContext('2d').putImageData(imageData, 0, 0);
         this.#$canvas.classList.add('workspace__partial-image');
 
+        const left = Math.max(sx - workspaceLeft, workspaceLeft); 
+        const top = Math.max(sy - workspaceTop, workspaceTop);
         this.#id = `${idPref}${idCounter}`;
         this.#$canvas.setAttribute('id', this.#id);
         this.#$canvas.style['z-index'] = zIndexCounter;
-        this.#$canvas.style.top = `${y}px`;
-        this.#$canvas.style.left = `${x}px`;
+        this.#$canvas.style.left = `${left}px`;
+        this.#$canvas.style.top = `${top}px`;
+        
         idCounter++;
-
-        this.applyMagnitude(mag);
     }
 
     applyMagnitude(mag) {
-        this.#$canvas.style.width = `${this.#$canvas.width / mag}px`;
-        this.#$canvas.style.height = `${this.#$canvas.height / mag}px`;
+        this.#paritalImageModel.setMagnitude(mag);
     }
 
     setUpEvents() {
@@ -99,12 +103,21 @@ export default class PartialImageView {
             ondragend: () => this.#$canvas.classList.remove('is-dragged')
         });
 
+        DOM.dblclick(this.#$canvas, event => {
+            this.#paritalImageModel.toggleSize(event.pageX, event.pageY);
+        });
+
         DOM.contextmenu(this.#$canvas, event => {
             event.preventDefault();
             event.stopPropagation();
             this.#partialImageContextMenuModel.showContextMenu(
                 this.#id, event.pageX, event.pageY, zIndexCounter + 1
             );
+        });
+
+        CommonEventDispatcher.on(CustomEventNames.IMAGE_CAPTURE__TOGGLE_PARTIAL_IMAGE_SIZE, event => {
+            const { resetPosition } = event.detail;
+            this.#resize(resetPosition);
         });
     }
 
@@ -121,5 +134,20 @@ export default class PartialImageView {
         anchor.href = this.#$canvas.toDataURL('image/png');
         anchor.download = 'iamge.png';
         anchor.click();
+    }
+
+    #resize(resetPosition) {
+
+        const { width, height, top, left } = this.#paritalImageModel.calcSizes(
+            this.#$canvas.width, this.#$canvas.height
+        );
+
+        this.#$canvas.style.width = `${width}px`;
+        this.#$canvas.style.height = `${height}px`;
+        
+        if (resetPosition) {
+            this.#$canvas.style.top = `${top}px`;
+            this.#$canvas.style.left = `${left}px`;
+        }
     }
 }

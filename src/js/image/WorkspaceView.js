@@ -185,11 +185,12 @@ export default class WorkspaceView {
         // console.log(`sx ${sx}, sy ${sy}, left: ${workspaceLeft}, top: ${workspaceTop}`);
 
         const view = new PartialImageView(
-            this.#partialImageContextMenuModel, imageData, mag,
+            this.#partialImageContextMenuModel, imageData,
             Math.max(sx - workspaceLeft, workspaceLeft), 
             Math.max(sy - workspaceTop, workspaceTop)
         );
         view.setUpEvents();
+        view.applyMagnitude(mag);
         
         this.#partialImages.set(view.getId(), view);
         this.#$workspace.appendChild(view.getEl());
