@@ -6,6 +6,7 @@ const MINIMIZED_WIDTH = 80;
 
 export default class PartialImageModel {
 
+    #id;
     #workspaceLeft;
     #workspaceTop;
 
@@ -13,7 +14,8 @@ export default class PartialImageModel {
     #magnitude;
     #isMinimized;
 
-    constructor(workspaceLeft ,workspaceTop) {
+    constructor(id, workspaceLeft ,workspaceTop) {
+        this.#id = id;
         this.#workspaceLeft = workspaceLeft;
         this.#workspaceTop = workspaceTop;
         this.#clickedXy = { x: 0, y: 0 };
@@ -25,7 +27,7 @@ export default class PartialImageModel {
         this.#magnitude = mag;
         CommonEventDispatcher.dispatch(CustomEventNames.IMAGE_CAPTURE__TOGGLE_PARTIAL_IMAGE_SIZE, {
             resetPosition: false
-        });
+        }, this.#id);
     }
 
     toggleSize(x, y) {       
@@ -33,7 +35,7 @@ export default class PartialImageModel {
         this.#isMinimized = !this.#isMinimized;
         CommonEventDispatcher.dispatch(CustomEventNames.IMAGE_CAPTURE__TOGGLE_PARTIAL_IMAGE_SIZE, {
             resetPosition: true
-        });
+        }, this.#id);
     }
 
     calcSizes(canvasWidth, canvasHeight) {
@@ -50,8 +52,8 @@ export default class PartialImageModel {
         const { x, y} = this.#clickedXy;
         return {
             width, height,
-            top: (y - height / 2) - this.#workspaceTop,
-            left: (x - width / 2) - this.#workspaceLeft
+            top: Math.max((y - height / 2) - this.#workspaceTop, this.#workspaceTop),
+            left: Math.max((x - width / 2) - this.#workspaceLeft, this.#workspaceLeft)
         };
     }
 }

@@ -186,8 +186,7 @@ export default class WorkspaceView {
 
         const view = new PartialImageView(
             this.#partialImageContextMenuModel, imageData,
-            Math.max(sx - workspaceLeft, workspaceLeft), 
-            Math.max(sy - workspaceTop, workspaceTop)
+            sx, sy, workspaceLeft, workspaceTop
         );
         view.setUpEvents();
         view.applyMagnitude(mag);

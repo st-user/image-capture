@@ -66,9 +66,10 @@ export default class PartialImageView {
     #$canvas;
 
     constructor(partialImageContextMenuModel, imageData, sx, sy, workspaceLeft, workspaceTop) {
+        this.#id = `${idPref}${idCounter}`;
 
         this.#partialImageContextMenuModel = partialImageContextMenuModel;
-        this.#paritalImageModel = new PartialImageModel(workspaceLeft, workspaceTop);
+        this.#paritalImageModel = new PartialImageModel(this.#id, workspaceLeft, workspaceTop);
 
         this.#$canvas = document.createElement('canvas');
         this.#$canvas.width = imageData.width;
@@ -78,7 +79,6 @@ export default class PartialImageView {
 
         const left = Math.max(sx - workspaceLeft, workspaceLeft); 
         const top = Math.max(sy - workspaceTop, workspaceTop);
-        this.#id = `${idPref}${idCounter}`;
         this.#$canvas.setAttribute('id', this.#id);
         this.#$canvas.style['z-index'] = zIndexCounter;
         this.#$canvas.style.left = `${left}px`;
@@ -118,7 +118,7 @@ export default class PartialImageView {
         CommonEventDispatcher.on(CustomEventNames.IMAGE_CAPTURE__TOGGLE_PARTIAL_IMAGE_SIZE, event => {
             const { resetPosition } = event.detail;
             this.#resize(resetPosition);
-        });
+        }, this.#id);
     }
 
     getEl() {
